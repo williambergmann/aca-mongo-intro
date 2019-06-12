@@ -8,7 +8,7 @@ router.get('/', (request, response) => {
 })
 
 router.get('/:name', (request, response) => {
-  UsersController.getOne(/* name param */)
+  UsersController.getOne(request.params.name)
     .then(result => {
       if (!result) throw new Error('No user found')
       response.json(result)
@@ -18,21 +18,22 @@ router.get('/:name', (request, response) => {
 
 router.post('/default', (request, response) => {
   UsersController.createDefault()
-    .then(() => response.status(204).send())
+    .then(() => response.status(204).send('Default user added'))
 })
 
 router.post('/', (request, response) => {
-  UsersController.createUser(/* request body */)
+  UsersController.createUser(request.body)
     .then(() => response.send('User created'))
 })
 
 router.put('/:name', (request, response) => {
-  UsersController.updateUser(/* name param, request body */)
-    .then(() => response.status(204).send())
+  UsersController.updateUser(request.params.name, request.body)
+    .then(() => response.status(204).send('User updated'))
+    .catch(err => response.status(500).send(err.message))
 })
 
 router.delete('/:name', (request, response) => {
-  UsersController.deleteUser(/* name param */)
+  UsersController.deleteUser(request.params.name)
     .then(() => response.send('User deleted'))
 })
 

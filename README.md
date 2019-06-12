@@ -48,8 +48,11 @@ We are going to walk through the basic CRUD commands for a collection of users. 
 
 4. Now repeat step 3 with the name `maxamillion`, which hopefully doesn't exist in your database
   - What did you get this time?
+    No user found
   - Did you notice the status code?
+    404 Not Found
   - How did we handle that? Find it in the code
+    line 16 send(err.message)
 
 ### Part 3 - PUT (Update)
 
